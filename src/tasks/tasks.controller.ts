@@ -7,25 +7,25 @@ import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 
 @Controller('tasks')
 export class TasksController {
-    constructor(private TasksService: TasksService) {}
+    constructor(private tasksService: TasksService) {}
     
     @Get()
     getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
         if(Object.keys(filterDto).length) {
-           return this.TasksService.getTasksWithFilters(filterDto);
+           return this.tasksService.getTasksWithFilters(filterDto);
         } else {
-            return this.TasksService.getAllTasks();
+            return this.tasksService.getAllTasks();
         }
     }
 
     @Get('/:id')
     getTaskById(@Param('id') id: string): Task {
-        return this.TasksService.getTaskByID(id);
+        return this.tasksService.getTaskByID(id);
     }
 
     @Post()
     createTask(@Body() CreateTaskDTO: CreateTaskDto): Task {
-        return this.TasksService.createTask(CreateTaskDTO);
+        return this.tasksService.createTask(CreateTaskDTO);
     }
 
     @Patch('/:id/status')
@@ -33,12 +33,12 @@ export class TasksController {
         @Param('id') id: string,
         @Body('status') status: TaskStatus
     ): Task {
-        return this.TasksService.updateTaskStatus(id, status);
+        return this.tasksService.updateTaskStatus(id, status);
     }
 
     @Delete('/:id')
     deleteTask(@Param('id') id: string): void {
-        return this.TasksService.deleteTask(id);
+        return this.tasksService.deleteTask(id);
     }
 
 }
