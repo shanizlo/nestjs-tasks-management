@@ -16,6 +16,9 @@ export class AuthService {
         ) {}
 
     signup(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+
+        this.logger.debug(`Created new user ${JSON.stringify(authCredentialsDto)}`);
+
         return this.userRepository.signUp(authCredentialsDto);
     }
 
