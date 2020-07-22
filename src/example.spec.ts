@@ -36,11 +36,6 @@ describe('FriendsList', () => {
         friendsList = new FriendsList();
     });
 
-    afterEach(() => {
-        console.log(`friends list is: ${friendsList}`);
-    })
-
-
     it('initializes friends list', () => {
         expect(friendsList.friends.length).toEqual(0);
     });
@@ -62,14 +57,17 @@ describe('FriendsList', () => {
         expect(friendsList.announceFriendship).toHaveBeenCalled();
         expect(friendsList.announceFriendship).toHaveBeenCalledWith('Shani');
     });
-});
-
-describe(('remove friend'), () => {
-    it(('removes the friend from the list'), () => {
-
-    });
-
-    it(('throws an error as friend not exists'), () => {
-
+    
+    describe(('remove friend'), () => {
+        it(('removes the friend from the list'), () => {
+            friendsList.addFriend('Ariel');
+            expect(friendsList.friends[0]).toEqual('Ariel');
+            friendsList.removeFriend('Ariel');
+            expect(friendsList.friends[0]).toBeUndefined();
+        });
+    
+        it(('throws an error as friend not exists'), () => {
+            expect(() => friendsList.removeFriend('Ariel')).toThrow(new Error(`Friend Ariel not found`));
+        });
     });
 });
