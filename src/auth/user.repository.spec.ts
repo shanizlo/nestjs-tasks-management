@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { UserRepository } from './user.repository';
 import { ConflictException, InternalServerErrorException } from '@nestjs/common';
-import * as bcrypt from './bcryptjs'
+import * as bcrypt from 'bcrypt'
 
 const mockCredentialsDto = { username: 'TestUsername', passwor: 'TestPassword'};
 
@@ -80,7 +80,7 @@ describe('UserRepository', () => {
                 bcrypt.hash = jest.fn().mockResolvedValue('testHash');
                 expect(bcrypt.hash).not.toHaveBeenCalled();
                 const result = await userRepository.hashPassword('testPassword', 'testSalt');
-                expect(bcrypt.hash).toHaveBeenCalled('testPassword', 'testSalt');
+                expect(bcrypt.hash).toHaveBeenCalledWith('testPassword', 'testSalt');
                 expect(result).toEqual('testHash');
             })
         })
