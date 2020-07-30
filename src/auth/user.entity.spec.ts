@@ -7,10 +7,10 @@ describe('User entity', () => {
     beforeEach(() => {
         user = new User();
         user.password = 'testPassword';
-        user.salt = 'TestSalt';
+        user.salt = 'testSalt';
         bcrypt.hash = jest.fn();
-
     })
+    
     describe('validatePassword', () => {
         it('returns true as password is valid', async () => {
             bcrypt.hash.mockReturnValue('testPassword');
